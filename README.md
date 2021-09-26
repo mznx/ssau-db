@@ -1,5 +1,4 @@
 # ssau-db
-___
 ## Install
 #### 1. backend
 ```bash
