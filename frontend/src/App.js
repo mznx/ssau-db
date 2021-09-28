@@ -1,39 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import IngredientItem from './components/IngredientItem/IngredientItem';
+import RecipeItem from './components/RecipeItem/RecipeItem';
 
-class App extends Component {
-state = {
-    data: null
-  };
 
-  componentDidMount() {
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
-  }
-    // fetching the GET route from the Express server which matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
+function App() {
 
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
-  };
+  const Ingredienst = [
+    { title: "Томаты", id: 1},
+    { title: "Огурцы", id: 2}
+  ]
 
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">{this.state.data}</p>
+  const Recipes = [
+    { name: "борщ", id: 1, recept: "Смешать хуйню всю"},
+    { name: "салат", id: 2, recept: "Плову, потом кашачю жопу"}
+  ]
+
+
+  return (
+    <div className="App">
+      <h1>Кулинарная книга рецептов</h1>
+
+
+      <div className="IngrList">
+        {Ingredienst.map( (item) => {
+         return(<IngredientItem name={item.title} id={item.id}/>)
+        })}
       </div>
-    );
-  }
+
+      <div className="RecipesList">
+        {
+          Recipes.map( (item) => {
+            return(
+              <RecipeItem name={item.name}  recept={item.recept} id={item.id}/>
+            )
+          })
+        }
+      </div>
+
+    </div>
+  )
 }
 
-export default App;
+export default App
