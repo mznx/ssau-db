@@ -74,3 +74,39 @@ Response
     }
 ]
 ```
+
+<br>
+
+#### Get list of all categories
+Request
+```
+GET /categories/
+```
+Response
+```
+[
+    {
+        "id": 1,
+        "name": "Супы"
+    },
+    ...
+]
+```
+
+<br>
+
+#### Get list of all ingredients
+Request
+```
+GET /ingredients/
+```
+Response
+```
+[
+    {
+        "id": 1,
+        "name": "Соль"
+    },
+    ...
+]
+```
