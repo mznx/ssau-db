@@ -81,6 +81,18 @@ app.get('/recipes/:id', (req, res) => {
                           WHERE Recipes_id = ?
                           `).all(id);
 
+  if (result.length !== 0) {
+    let ingredients = db.prepare(`
+                                  SELECT IngredientsRecipes_id AS id, Number AS number, Units.Name AS unit
+                                  FROM IngredientsRecipes
+                                  JOIN Units ON IngredientsRecipes.Units_id = Units.Units_id
+                                  WHERE Recipes_id = ?
+                                  `).all(id);
+
+    // let ids = result[0].text.match(/(?<={)([0-9]+)(?=})/g);
+    result[0].ingredients = ingredients;
+  }
+
   res.json(result);
 });
 
