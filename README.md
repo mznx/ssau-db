@@ -49,15 +49,6 @@ Response as in the example above
 
 <br>
 
-#### Get list of recipes by category
-Request
-```
-GET /recipes?categories={list of categories}
-```
-Response as in the example above
-
-<br>
-
 #### Get list of recipes by category and ingredients
 Request
 ```
