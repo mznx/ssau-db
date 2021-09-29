@@ -83,3 +83,27 @@ app.get('/recipes/:id', (req, res) => {
 
   res.json(result);
 });
+
+
+// получить категории
+app.get('/categories', (req, res) => {
+  // select all
+  var result = db.prepare(`
+                          SELECT Categories.Categories_id AS id, Categories.Name AS name
+                          FROM Categories
+                          `).all();
+
+  res.json(result);
+});
+
+
+// получить ингредиенты
+app.get('/ingredients', (req, res) => {
+  // select all
+  var result = db.prepare(`
+                          SELECT Ingredients.Ingredients_id AS id, Ingredients.Name AS name
+                          FROM Ingredients
+                          `).all();
+
+  res.json(result);
+});
