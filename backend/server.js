@@ -30,6 +30,7 @@ app.get('/recipes', (req, res) => {
   } else if (!params.hasOwnProperty('categories')) {
     // select by ingredients
     const ingredients = params.ingredients.replace(/[^0-9]+/g, ',').replace(/^,|,$/g, ''); // очищаем ввод
+    const num_of_ingredients = new Set(ingredients.split(',')).size;
     var result = db.prepare(`
                             SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category
                             FROM Recipes
@@ -37,7 +38,9 @@ app.get('/recipes', (req, res) => {
                             WHERE Recipes_id IN (
                               SELECT Recipes_id
                               FROM IngredientsRecipes
-                              WHERE Ingredients_id IN (${ingredients}))
+                              WHERE Ingredients_id IN (${ingredients})
+                              GROUP BY Recipes_id
+                              HAVING COUNT( DISTINCT Ingredients_id ) = ${num_of_ingredients})
                             `).all();
 
   } else if (!params.hasOwnProperty('ingredients')) {
@@ -54,6 +57,7 @@ app.get('/recipes', (req, res) => {
     // select by categories and ingredients
     const categories = params.categories.replace(/[^0-9]+/g, ',').replace(/^,|,$/g, ''); // очищаем ввод
     const ingredients = params.ingredients.replace(/[^0-9]+/g, ',').replace(/^,|,$/g, ''); // очищаем ввод
+    const num_of_ingredients = new Set(ingredients.split(',')).size;
     var result = db.prepare(`
                             SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category
                             FROM Recipes
@@ -62,7 +66,9 @@ app.get('/recipes', (req, res) => {
                             AND Recipes_id IN (
                               SELECT Recipes_id
                               FROM IngredientsRecipes
-                              WHERE Ingredients_id IN (${ingredients}))
+                              WHERE Ingredients_id IN (${ingredients})
+                              GROUP BY Recipes_id
+                              HAVING COUNT( DISTINCT Ingredients_id ) = ${num_of_ingredients})
                             `).all();
   }
 
