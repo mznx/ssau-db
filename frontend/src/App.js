@@ -27,8 +27,6 @@ function App() {
     console.log(recipe);
   }
 
-debugger;
-  
 return (
     <div className="App">
       <h1 onClick={() => {logi()}}>Кулинарная книга рецептов</h1>
@@ -40,20 +38,16 @@ return (
         })}
       </div>
 
-      {
-        recipe.lenght == 0 ? 
-        <div> нет данных </div>
-        :
-        <div className="RecipesList">
+      <div className="RecipesList">
         {
           recipe.map( (item) => {
             return(
-              <RecipeItem name={item.name}  recept={item.category} id={item.id}/>
+              <RecipeItem name={item.name} id={item.id}/>
             )
           })
         }
       </div>
-      }
+      
 
     </div>
   )
