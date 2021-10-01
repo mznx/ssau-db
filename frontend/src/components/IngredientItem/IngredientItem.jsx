@@ -1,7 +1,7 @@
 import React from 'react'
 
 function IngredientItem(props) {
-    debugger;
+ 
     return (
         <div>
             <label>

@@ -7,8 +7,11 @@ function RecipeItem(props) {
     return (
         <div>
             {
-                click == true?  <div><label onClick={() => click? setclick(false): setclick(true)}> {props.name} </label>
-                <div className="Recipte">{props.recept}</div></div> : <label onClick={() => click? setclick(false): setclick(true)}> {props.name} </label>
+                click == true?  
+                <div><label onClick={() => click? setclick(false): setclick(true)}> {props.name} </label>
+                <div className="Recipte">{props.recept}</div></div> 
+                : 
+                <label onClick={() => click? setclick(false): setclick(true)}> {props.name} </label>
             }
             
         </div>
