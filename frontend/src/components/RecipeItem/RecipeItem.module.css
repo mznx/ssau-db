@@ -1,7 +1,7 @@
 .RecipeItem{
     font-size: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    margin: 5px;
+    margin: 15px;
     border-radius: 0 0 5px 20px;
     border-bottom: 5px solid #0A67A3;
 }
