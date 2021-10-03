@@ -1,14 +1,15 @@
 import React,{useState} from 'react'
-
+import classes from './IngredientItem.module.css';
 
 function IngredientItem(props) {
  
     const [click, setclick] = useState(false);
 
     return (
-        <div>
+        <div className={classes.IngredientItem}>
             <label>
-                <input type="checkbox" onClick={
+                <input type="checkbox" className={classes.checkbox}
+                    onClick={
                     click?
                    
                     () => {

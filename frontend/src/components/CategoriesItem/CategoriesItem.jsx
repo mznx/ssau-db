@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import classes from './CategoriesItem.module.css';
 
 function CategoriesItem(props) {
 
@@ -7,11 +8,10 @@ function CategoriesItem(props) {
 
     return (
 
-        <div >
-
+        <div className={classes.CategoryItem}>
 
             <label >
-                <input type="checkbox" onClick={
+                <input  className={classes.checkbox} type="checkbox" onClick={
                     click?
                    
                     () => {

@@ -70,7 +70,10 @@ function App() {
 
   }
 
-  //полный пиздец но работает
+  /*Функция превращающая массив id категорий и id ингредиентов
+   в строку и делающая запрос на сервер в зависимости от условия
+   существования ингредиентов или категорий в массиве */
+
   const filterReqFun = (filter) => {
 
     let unfiltar = filter
@@ -147,19 +150,23 @@ return (
 
   <div className="Listsof">
 
+
       <div className="categoryList">
+        <h3 className="ListTitle">Список категорий</h3>
         {categories.map( (item) => {
-         return(<CategoriesItem name={item.name} id={item.id} className="CategoryItem" getid={getid} removeid={removeid}/>)
+         return(<CategoriesItem name={item.name} id={item.id} getid={getid} removeid={removeid}/>)
         })}
       </div>
 
       <div className="IngrList">
+        <h3 className="ListTitle">Список ингредиентов</h3>
         {ingredients.map( (item) => {
-         return(<IngredientItem name={item.name} id={item.id} className="IngrItem" getid={getid} removeid={removeid}/>)
+         return(<IngredientItem name={item.name} id={item.id} getid={getid} removeid={removeid}/>)
         })}
       </div>
 
       <div className="RecipesList">
+        <h3 className="ListTitle">Список рецептов</h3>
         {
           recipe.map( (item) => {
             return(

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
-
+import classes from './RecipeItem.module.css';
 
 function RecipeItem(props) {
 
@@ -78,19 +78,19 @@ function RecipeItem(props) {
     }
 
     return (
-        <div>
+        <div >
             {
                 click === true? 
             
-                <div>
+                <div className={classes.RecipeItem}>
                 <label onClick={() => clickName()}> {props.name} </label>
-                <button onClick={() => incrementPortions(portions + 1)}>+</button>
-                <button onClick={() => decrementPortions(portions - 1)}>-</button>
-                <div>количество порций {portions}</div>
-                <div className="Recipte">Рецепт: {text}</div>
+                <button className={classes.gradientbutton} onClick={() => incrementPortions(portions + 1)}>+</button>
+                <button className={classes.gradientbutton} onClick={() => decrementPortions(portions - 1)}>-</button>
+                <div className={classes.porcions}>количество порций: {portions}</div>
+                <div className={classes.recipe}>Рецепт: {text}</div>
                 </div> 
                 : 
-                <label onClick={() => clickName()}> {props.name} </label>
+                <label className={classes.RecipeItem} onClick={() => clickName()}> {props.name} </label>
             }
             
         </div>

@@ -1,0 +1,45 @@
+.RecipeItem{
+    font-size: 25px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 5px;
+    border-radius: 0 0 5px 20px;
+    border-bottom: 5px solid #0A67A3;
+}
+.recipe {
+    padding: 20px 40px;
+    background: #77207D; /* фон рамки */
+    font-size: 20px; /* размер шрифта */
+    border: 2px dashed #e3c3d4; /* размер, форма и цвет рамки */
+    border-radius: 10px; /*  радиус скругления углов рамки */
+    box-shadow: 0 0 0 4px #968089, 2px 1px 6px 4px rgba(150, 128, 137, 0.5); /* смещение, размер и цвет тени рамки*/
+      color: #fff;
+      font-family: 'Lato', sans-serif;
+}
+
+.porcions{
+    padding: 20px 20px 21px 20px;
+    text-align: center;
+    float: none;
+    border: 0px solid #333;
+    border-bottom: 1px solid #00a4da;
+    background: #01ade7;
+    border-radius: 20px;
+}
+
+.gradientbutton {
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to left, #1b68b1 0%, #3c70be 51%, #1063c2 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    transition: .5s;
+  }
+  .gradientbutton:hover {
+    background-position: right center;
+  }
