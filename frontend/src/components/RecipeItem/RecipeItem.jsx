@@ -13,7 +13,7 @@ function RecipeItem(props) {
 
     const [text, settext] = useState(" ");
 
-
+    //запрос конкретного рецепта по id
     useEffect(() => {
         axios.get(`http://localhost:5000/recipes/${props.id}`)
     .then(response => {
@@ -21,7 +21,8 @@ function RecipeItem(props) {
     })
       }, [setrecept])
 
-    const postinText = (por = 1) => {
+    //парсер текста по ингредиентам
+      const postinText = (por = 1) => {
 
         if (recept.length != 0){
         
@@ -50,6 +51,7 @@ function RecipeItem(props) {
         
     }
 
+    //онклик на скрытие - открытие текста рецепта
     const clickName = () => {
         if (click === true) {
             setclick(false)
@@ -61,7 +63,7 @@ function RecipeItem(props) {
 
     }
 
-
+    //инкремент, декремент количества порций
     const incrementPortions = (por) => {
         console.log(por)
         postinText(por)

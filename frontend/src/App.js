@@ -3,7 +3,13 @@ import './App.css';
 import IngredientItem from './components/IngredientItem/IngredientItem';
 import RecipeItem from './components/RecipeItem/RecipeItem';
 import axios from "axios";
+import CategoriesItem from './components/CategoriesItem/CategoriesItem';
 
+
+// массив всех категорий и ингредиентов по айди
+var filterRequest = [
+
+]
 
 function App() {
   
@@ -12,13 +18,14 @@ function App() {
   const [categories, setcategories] = useState([])
   const [state, setstate] = useState(1)
 
+
 //Запрос всех рецептов
   useEffect(() => {
     console.log('get rec');
     axios.get("http://localhost:5000/recipes")
     .then(response => 
       setrecipe(response.data))
-  }, [setrecipe])
+  }, [])
 
 //Запрос всех категорий
   useEffect(() => {
@@ -26,7 +33,7 @@ function App() {
     axios.get("http://localhost:5000/categories")
     .then(response => 
       setcategories(response.data))
-  }, [setcategories])
+  }, [])
 
 //Запрос всех ингредиентов
   useEffect(() => {
@@ -34,8 +41,98 @@ function App() {
     axios.get("http://localhost:5000/ingredients")
     .then(response => 
       setingredients(response.data))
-  }, [setingredients])
+  }, [])
 
+//получение id и добавление в массив
+  const getid = (idAdd) => {
+
+    filterRequest.push(idAdd)
+  
+    let filter = filterRequest
+
+    filterReqFun(filter)
+
+
+  }
+
+//получение id и удаление из массива
+  const removeid = (idRemove) => {
+    
+    filterRequest.forEach( (element, index) => {
+      if ((element.name == idRemove.name) && (element.id == idRemove.id)){
+        filterRequest.splice(index,1)
+      }
+    });
+
+    let filter = filterRequest
+
+    filterReqFun(filter)
+
+  }
+
+  //полный пиздец но работает
+  const filterReqFun = (filter) => {
+
+    let unfiltar = filter
+
+    let ListOfCategories = []
+    let ListOfIngredients = []
+
+
+    unfiltar.forEach(element => {
+      if (element.name == 'category'){
+        ListOfCategories.push(element.id)
+      }
+      if (element.name == 'ingredients'){
+        ListOfIngredients.push(element.id)
+      }
+    });
+
+
+    let categoryes = ListOfCategories.join(',')
+    let ingredients = ListOfIngredients.join(',')
+
+    console.log(categoryes);
+    console.log(ingredients);
+
+    let data = {}
+    
+    if ( ListOfCategories.length == 0 && ListOfIngredients.length != 0 ){
+      axios.get(`http://localhost:5000/recipes?ingredients=${ingredients}`)
+      .then(response => {
+      data = response.data
+      setrecipe(data)
+      }
+      )
+    }
+    if ( ListOfCategories.length != 0 && ListOfIngredients.length == 0 ){
+      axios.get(`http://localhost:5000/recipes?categories=${categoryes}`)
+      .then(response =>{ 
+      data = response.data
+      setrecipe(data)
+    })
+      
+    }
+    if ( ListOfCategories.length != 0 && ListOfIngredients.length != 0 ){
+      axios.get(`http://localhost:5000/recipes?categories=${categoryes}&ingredients=${ingredients}`)
+      .then(response =>{ 
+      data = response.data
+      setrecipe(data)
+    })
+      
+    }
+    if ( ListOfCategories.length == 0 && ListOfIngredients.length == 0 ){
+      axios.get(`http://localhost:5000/recipes`)
+      .then(response =>{ 
+      data = response.data
+      setrecipe(data)
+      })
+      
+    }
+
+  }
+
+//вывод ответов в консоль
   function logi() {
     console.log(recipe);
     console.log(categories);
@@ -52,13 +149,13 @@ return (
 
       <div className="categoryList">
         {categories.map( (item) => {
-         return(<IngredientItem name={item.name} id={item.id} className="CategoryItem"/>)
+         return(<CategoriesItem name={item.name} id={item.id} className="CategoryItem" getid={getid} removeid={removeid}/>)
         })}
       </div>
 
       <div className="IngrList">
         {ingredients.map( (item) => {
-         return(<IngredientItem name={item.name} id={item.id} className="IngrItem"/>)
+         return(<IngredientItem name={item.name} id={item.id} className="IngrItem" getid={getid} removeid={removeid}/>)
         })}
       </div>
 
