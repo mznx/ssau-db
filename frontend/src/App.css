@@ -1,3 +1,9 @@
+.Listsof{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
 .IngrList {
     margin: 20px;
     display:inline-block;
@@ -13,4 +19,17 @@
     padding: 15px;
     border: 2px solid turquoise;
     margin-top: 15px;
+    max-width: 300px;
+}
+
+.categoryList {
+    margin: 20px;
+    display:inline-block;
+    padding: 15px;
+    border: 2px solid turquoise;
+    margin-top: 15px;
+}
+
+.title{
+ text-align: center;   
 }

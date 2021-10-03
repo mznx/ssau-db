@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 
+
 function RecipeItem(props) {
 
 
@@ -22,29 +23,30 @@ function RecipeItem(props) {
 
     const postinText = (por = 1) => {
 
-    if (recept.length != 0){
+        if (recept.length != 0){
         
-        console.log(por);
+            console.log(por);
 
-        let ingredients = recept[0].ingredients
+            let ingredients = recept[0].ingredients
 
-        let text = recept[0].text
+            let text = recept[0].text
 
-        text = text.split(' ')
+            text = text.split(' ')
 
 
-    text.forEach( (item, i) => {
+            text.forEach( (item, i) => {
 	
-        ingredients.forEach((element) => {
-  		    if( `{${element.id}}` == item ){
-                text[i] = `${element.number * por} ${element.unit}`
-        }
-        }) 
+                ingredients.forEach((element) => {
+  		            if( `{${element.id}}` == item ){
+                        text[i] = `${element.number * por} ${element.unit}`
+                    }
+                }) 
 
-    })
+            })
+
         text = text.join(' ')
         settext(text)
-    }
+        }
         
     }
 

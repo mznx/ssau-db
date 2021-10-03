@@ -1,10 +1,8 @@
 import React from 'react'
 
-
-function IngredientItem(props) {
- 
+function CategoriesItem(props) {
     return (
-        <div>
+        <div className={props.className}>
             <label>
                 <input type="checkbox" />
                 {props.name}
@@ -13,4 +11,4 @@ function IngredientItem(props) {
     )
 }
 
-export default IngredientItem
+export default CategoriesItem
