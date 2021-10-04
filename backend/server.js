@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+const cors = require('cors');
 
 
 try {
@@ -9,6 +10,9 @@ try {
   console.log('Failed to connect to the database, check that the required file exists.');
   process.exit();
 }
+
+
+app.use(cors());
 
 
 // This displays message that the server running and listening to specified port
