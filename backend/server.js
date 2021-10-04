@@ -26,9 +26,11 @@ app.get('/recipes', (req, res) => {
   if (!params.hasOwnProperty('categories') && !params.hasOwnProperty('ingredients')) {
     // select all
     var result = db.prepare(`
-                            SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category
+                            SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category, Recipes.Categories_id AS category_id, GROUP_CONCAT(IngredientsRecipes.Ingredients_id) AS ingredients
                             FROM Recipes
                             JOIN Categories ON Recipes.Categories_id = Categories.Categories_id
+                            JOIN IngredientsRecipes ON Recipes.Recipes_id = IngredientsRecipes.Recipes_id
+                            GROUP BY Recipes.Recipes_id
                             `).all();
   
   } else if (!params.hasOwnProperty('categories')) {
@@ -36,25 +38,29 @@ app.get('/recipes', (req, res) => {
     const ingredients = params.ingredients.replace(/[^0-9]+/g, ',').replace(/^,|,$/g, ''); // очищаем ввод
     const num_of_ingredients = new Set(ingredients.split(',')).size;
     var result = db.prepare(`
-                            SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category
+                            SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category, Recipes.Categories_id AS category_id, GROUP_CONCAT(IngredientsRecipes.Ingredients_id) AS ingredients
                             FROM Recipes
                             JOIN Categories ON Recipes.Categories_id = Categories.Categories_id
-                            WHERE Recipes_id IN (
-                              SELECT Recipes_id
+                            JOIN IngredientsRecipes ON Recipes.Recipes_id = IngredientsRecipes.Recipes_id
+                            WHERE Recipes.Recipes_id IN (
+                              SELECT IngredientsRecipes.Recipes_id
                               FROM IngredientsRecipes
                               WHERE Ingredients_id IN (${ingredients})
-                              GROUP BY Recipes_id
+                              GROUP BY IngredientsRecipes.Recipes_id
                               HAVING COUNT( DISTINCT Ingredients_id ) = ${num_of_ingredients})
+                            GROUP BY Recipes.Recipes_id
                             `).all();
 
   } else if (!params.hasOwnProperty('ingredients')) {
     // select by categories
     const categories = params.categories.replace(/[^0-9]+/g, ',').replace(/^,|,$/g, ''); // очищаем ввод
     var result = db.prepare(`
-                            SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category
+                            SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category, Recipes.Categories_id AS category_id, GROUP_CONCAT(IngredientsRecipes.Ingredients_id) AS ingredients
                             FROM Recipes
                             JOIN Categories ON Recipes.Categories_id = Categories.Categories_id
+                            JOIN IngredientsRecipes ON Recipes.Recipes_id = IngredientsRecipes.Recipes_id
                             WHERE Recipes.Categories_id IN (${categories})
+                            GROUP BY Recipes.Recipes_id
                             `).all();
   
   } else {
@@ -63,16 +69,18 @@ app.get('/recipes', (req, res) => {
     const ingredients = params.ingredients.replace(/[^0-9]+/g, ',').replace(/^,|,$/g, ''); // очищаем ввод
     const num_of_ingredients = new Set(ingredients.split(',')).size;
     var result = db.prepare(`
-                            SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category
+                            SELECT Recipes.Recipes_id AS id, Recipes.Name AS name, Categories.Name AS category, Recipes.Categories_id AS category_id, GROUP_CONCAT(IngredientsRecipes.Ingredients_id) AS ingredients
                             FROM Recipes
                             JOIN Categories ON Recipes.Categories_id = Categories.Categories_id
+                            JOIN IngredientsRecipes ON Recipes.Recipes_id = IngredientsRecipes.Recipes_id
                             WHERE Recipes.Categories_id IN (${categories})
-                            AND Recipes_id IN (
-                              SELECT Recipes_id
+                            AND Recipes.Recipes_id IN (
+                              SELECT IngredientsRecipes.Recipes_id
                               FROM IngredientsRecipes
                               WHERE Ingredients_id IN (${ingredients})
-                              GROUP BY Recipes_id
+                              GROUP BY IngredientsRecipes.Recipes_id
                               HAVING COUNT( DISTINCT Ingredients_id ) = ${num_of_ingredients})
+                            GROUP BY Recipes.Recipes_id
                             `).all();
   }
 
