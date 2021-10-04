@@ -23,7 +23,9 @@ Response
     {
         "id": 1,
         "name": "Борщ",
-        "category": "Суп"
+        "category": "Суп",
+        "category_id": 1,
+        "ingredients": "1,2,3"
     },
     ...
 ]
