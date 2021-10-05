@@ -11,6 +11,14 @@ var filterRequest = [
 
 ]
 
+var filterIdIngredients = [
+
+]
+
+var allIngr = [
+
+]
+
 function App() {
   
   const [recipe, setrecipe] = useState([])
@@ -39,8 +47,9 @@ function App() {
   useEffect(() => {
     console.log('get ingr');
     axios.get("http://localhost:5000/ingredients")
-    .then(response => 
-      setingredients(response.data))
+    .then(response => {
+      allIngr = response.data
+      setingredients(response.data)})
   }, [])
 
 //получение id и добавление в массив
@@ -95,15 +104,14 @@ function App() {
     let categoryes = ListOfCategories.join(',')
     let ingredients = ListOfIngredients.join(',')
 
-    console.log(categoryes);
-    console.log(ingredients);
-
     let data = {}
     
     if ( ListOfCategories.length == 0 && ListOfIngredients.length != 0 ){
       axios.get(`http://localhost:5000/recipes?ingredients=${ingredients}`)
       .then(response => {
       data = response.data
+      
+      addIngredientsIdtoFilterList(data)
       setrecipe(data)
       }
       )
@@ -112,6 +120,8 @@ function App() {
       axios.get(`http://localhost:5000/recipes?categories=${categoryes}`)
       .then(response =>{ 
       data = response.data
+
+      addIngredientsIdtoFilterList(data)
       setrecipe(data)
     })
       
@@ -120,6 +130,8 @@ function App() {
       axios.get(`http://localhost:5000/recipes?categories=${categoryes}&ingredients=${ingredients}`)
       .then(response =>{ 
       data = response.data
+
+      addIngredientsIdtoFilterList(data)
       setrecipe(data)
     })
       
@@ -128,10 +140,48 @@ function App() {
       axios.get(`http://localhost:5000/recipes`)
       .then(response =>{ 
       data = response.data
+
+      addIngredientsIdtoFilterList(data)
       setrecipe(data)
       })
       
     }
+
+  }
+
+  //функция, отображающая только имеющие смысл ингредиенты
+  const addIngredientsIdtoFilterList = (data) => {
+
+    let ingrData = []
+
+    //заношу все id ингредиентов в ingrData
+    data.forEach( element => {
+      let ids = element.ingredients
+      ids = ids.split(',')
+
+      ids.forEach( id => {
+        ingrData.push(id)
+      })
+    })
+
+    //убираю повторяющиеся 
+    ingrData = ingrData.filter(function(item, pos) {
+      return ingrData.indexOf(item) == pos;
+    })
+
+    let filteredIngredients = []
+    allIngr.forEach( element => {
+      ingrData.forEach( id => {
+        if ( element.id == id ){
+          filteredIngredients.push(element)
+        }
+      })
+    })
+
+
+    //заношу ингредиенты которые имеет смысл отображать
+    filterIdIngredients = filteredIngredients
+    setingredients(filterIdIngredients)
 
   }
 
