@@ -47,29 +47,29 @@ function App() {
   //получение id и добавление в массив
   const getid = (idAdd) => {
     filterRequest.push(idAdd)
-    filterReqFun(filterRequest)
+    filterReqFun()
   }
 
   //получение id и удаление из массива
-  const removeid = (idRemove) => {  
+  const removeid = (idRemove) => {
     filterRequest.forEach( (element, index) => {
       if ((element.name === idRemove.name) && (element.id === idRemove.id)) {
         filterRequest.splice(index, 1)
       }
-    });
+    })
 
-    filterReqFun(filterRequest)
+    filterReqFun()
   }
 
   /*Функция превращающая массив id категорий и id ингредиентов
    в строку и делающая запрос на сервер в зависимости от условия
    существования ингредиентов или категорий в массиве */
 
-  const filterReqFun = (filter) => {
+  const filterReqFun = () => {
     let ListOfCategories = []
     let ListOfIngredients = []
 
-    filter.forEach(element => {
+    filterRequest.forEach(element => {
       if (element.name === 'category') {
         ListOfCategories.push(element.id)
       } else {
@@ -96,6 +96,7 @@ function App() {
       const recipes = response.data
       
       addIngredientsIdtoFilterList(recipes)
+      setCheckedStatus();
       setrecipes(recipes)
     })
   }
@@ -132,6 +133,25 @@ function App() {
     setingredients(filteredListOfIngredients)
   }
 
+  const setCheckedStatus = () => {
+    // сбрасываем статус checked
+    categories.forEach((elem, i) => {categories[i].checked = false})
+    ingredients.forEach((elem, i) => {ingredients[i].checked = false})
+
+    // устанавливаем статут checked нужным
+    filterRequest.forEach(item => {
+      if (item.name === 'category') {
+        categories.forEach((category, index) => {
+          if (category.id === item.id) categories[index].checked = true
+        })
+      } else {
+        ingredients.forEach((ingredient, index) => {
+          if (ingredient.id === item.id) ingredients[index].checked = true
+        })
+      }
+    })
+  }
+
   //вывод ответов в консоль
   const logi = () => {
     console.log(recipes);
@@ -147,14 +167,14 @@ function App() {
         <div className="categoryList">
           <h3 className="ListTitle">Список категорий</h3>
           {categories.map(item => {
-            return(<CategoryItem name={item.name} id={item.id} getid={getid} removeid={removeid}/>)
+            return(<CategoryItem name={item.name} id={item.id} checked={item.checked} getid={getid} removeid={removeid}/>)
           })}
         </div>
         
         <div className="IngrList">
           <h3 className="ListTitle">Список ингредиентов</h3>
           {ingredients.map(item => {
-            return(<IngredientItem name={item.name} id={item.id} getid={getid} removeid={removeid}/>)
+            return(<IngredientItem name={item.name} id={item.id} checked={item.checked} getid={getid} removeid={removeid}/>)
           })}
         </div>
         

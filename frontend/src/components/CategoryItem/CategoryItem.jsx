@@ -1,27 +1,17 @@
-import React, {useState} from 'react'
+import React from 'react'
 import classes from './CategoryItem.module.css'
 
 
 function CategoryItem(props) {
-  const [click, setclick] = useState(false)
-
   return (
     <div className={classes.CategoryItem}>
       <label>
-        <input type="checkbox" className={classes.checkbox} onClick={
-          click?
+        <input type="checkbox" className={classes.checkbox} checked={props.checked} onClick={
+          props.checked === true ?
 
-          () => {
-            props.removeid({name: 'category', id: props.id})
-            setclick(false)
-          }
-
+          () => props.removeid({name: 'category', id: props.id})
           :
-
-          () => {
-            props.getid({name: 'category', id: props.id})
-            setclick(true)
-          }
+          () => props.getid({name: 'category', id: props.id})
           
           }/>
         {props.name}
