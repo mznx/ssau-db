@@ -167,21 +167,21 @@ function App() {
         <div className="categoryList">
           <h3 className="ListTitle">Список категорий</h3>
           {categories.map(item => {
-            return(<CategoryItem name={item.name} id={item.id} checked={item.checked} getid={getid} removeid={removeid}/>)
+            return(<CategoryItem key={item.id} name={item.name} id={item.id} checked={item.checked} getid={getid} removeid={removeid}/>)
           })}
         </div>
         
         <div className="IngrList">
           <h3 className="ListTitle">Список ингредиентов</h3>
           {ingredients.map(item => {
-            return(<IngredientItem name={item.name} id={item.id} checked={item.checked} getid={getid} removeid={removeid}/>)
+            return(<IngredientItem key={item.id} name={item.name} id={item.id} checked={item.checked} getid={getid} removeid={removeid}/>)
           })}
         </div>
         
         <div className="RecipesList">
           <h3 className="ListTitle">Список рецептов</h3>
           {recipes.map(item => {
-              return(<RecipeItem name={item.name} id={item.id}/>)
+              return(<RecipeItem key={item.id} name={item.name} id={item.id}/>)
           })}
         </div>
       </div>
