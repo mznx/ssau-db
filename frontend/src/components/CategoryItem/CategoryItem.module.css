@@ -1,4 +1,4 @@
-.CategoryItem{
+.CategoryItem {
     font-size: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 10px;
@@ -8,7 +8,7 @@
 }
 
 .checkbox {
-    transform:scale(1.3);
-    opacity:0.9;
-    cursor:pointer;
+    transform: scale(1.3);
+    opacity: 0.9;
+    cursor: pointer;
 }

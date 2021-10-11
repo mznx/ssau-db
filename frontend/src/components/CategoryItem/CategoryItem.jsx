@@ -1,28 +1,28 @@
 import React, {useState} from 'react'
-import classes from './IngredientItem.module.css'
+import classes from './CategoryItem.module.css'
 
 
-function IngredientItem(props) {
+function CategoryItem(props) {
   const [click, setclick] = useState(false)
 
   return (
-    <div className={classes.IngredientItem}>
+    <div className={classes.CategoryItem}>
       <label>
         <input type="checkbox" className={classes.checkbox} onClick={
           click?
-          
+
           () => {
-            props.removeid({name: 'ingredient', id: props.id})
+            props.removeid({name: 'category', id: props.id})
             setclick(false)
           }
 
           :
-          
+
           () => {
-            props.getid({name: 'ingredient', id: props.id})
+            props.getid({name: 'category', id: props.id})
             setclick(true)
           }
-
+          
           }/>
         {props.name}
       </label>
@@ -31,4 +31,4 @@ function IngredientItem(props) {
 }
 
 
-export default IngredientItem
+export default CategoryItem

@@ -1,4 +1,4 @@
-.Listsof{
+.Listsof {
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -28,9 +28,9 @@
     margin-top: 15px;
 }
 
-.title{
- text-align: center;
- font-family: Georgia, 'Times New Roman', Times, serif;   
+.title {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;   
 }
 
 .ListTitle {
@@ -38,5 +38,5 @@
     text-align: center;
     font-size: 25px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    text-decoration:underline;
+    text-decoration: underline;
 }

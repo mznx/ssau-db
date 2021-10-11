@@ -1,4 +1,4 @@
-.RecipeItem{
+.RecipeItem {
     font-size: 25px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 15px;
@@ -12,11 +12,11 @@
     border: 2px dashed #e3c3d4; /* размер, форма и цвет рамки */
     border-radius: 10px; /*  радиус скругления углов рамки */
     box-shadow: 0 0 0 4px #968089, 2px 1px 6px 4px rgba(150, 128, 137, 0.5); /* смещение, размер и цвет тени рамки*/
-      color: #fff;
-      font-family: 'Lato', sans-serif;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
 }
 
-.porcions{
+.porcions {
     padding: 20px 20px 21px 20px;
     text-align: center;
     float: none;
@@ -40,6 +40,6 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     transition: .5s;
   }
-  .gradientbutton:hover {
+.gradientbutton:hover {
     background-position: right center;
-  }
+}
