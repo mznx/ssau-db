@@ -4,6 +4,7 @@
     margin: 15px;
     border-radius: 0 0 5px 20px;
     border-bottom: 5px solid #0A67A3;
+    max-height: max-content;
 }
 .recipe {
     padding: 20px 40px;
@@ -42,4 +43,10 @@
   }
 .gradientbutton:hover {
     background-position: right center;
+}
+
+
+.graph1{
+   opacity: 3.;
+   background-color: #77207D;
 }

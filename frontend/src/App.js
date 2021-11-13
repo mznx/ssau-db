@@ -4,6 +4,9 @@ import IngredientItem from './components/IngredientItem/IngredientItem';
 import RecipeItem from './components/RecipeItem/RecipeItem';
 import CategoryItem from './components/CategoryItem/CategoryItem';
 import './App.css';
+import Statistic from './components/Statistic/Statistic';
+import './stl.scss';
+
 
 
 // массив всех категорий и ингредиентов по айди
@@ -185,6 +188,14 @@ function App() {
           })}
         </div>
       </div>
+
+      <div className="Statistic">
+        <div><Statistic title="Статистика количества рецептов в категориях" recipes={recipes} option="recipes"/></div>
+        <div><Statistic title="Статистика количества ингредиентов в рецептах" recipes={recipes} option="ingr"/></div>
+      </div>
+
+      
+
   
     </div>
   )

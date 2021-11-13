@@ -18,7 +18,7 @@
     padding: 15px;
     border-radius: 0 10px 20px;
     border: 5px solid #4B5ED7;
-    max-width: 400px;
+    max-width: 600px;
 }
 
 .categoryList {
@@ -39,4 +39,25 @@
     font-size: 25px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-decoration: underline;
+}
+
+.graph{
+    max-width: 1080px;
+    max-height: 1080px;
+}
+
+.Statistic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    flex: 1 1 0;
+}
+
+.Statistic div {
+            flex: 1;
+            border: 1px solid black;
+            padding: 10px;
 }

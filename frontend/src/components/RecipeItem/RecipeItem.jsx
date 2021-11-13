@@ -3,6 +3,8 @@ import axios from 'axios'
 import classes from './RecipeItem.module.css'
 
 
+
+
 function RecipeItem(props) {
   const [portions, setportions] = useState(1)
   const [click, setclick] = useState(false);
@@ -17,6 +19,8 @@ function RecipeItem(props) {
 
   //парсер текста по ингредиентам
   const postinText = (por = 1) => {
+
+
     if (recipe.length !== 0) {
       console.log(por);
       let ingredients = recipe[0].ingredients
@@ -29,6 +33,7 @@ function RecipeItem(props) {
           }
         })
       })
+
 
       text = text.join(' ')
       settext(text)
@@ -71,6 +76,7 @@ function RecipeItem(props) {
         <button className={classes.gradientbutton} onClick={() => decrementPortions(portions - 1)}>-</button>
         <div className={classes.porcions}>количество порций: {portions}</div>
         <div className={classes.recipe}>Рецепт: {text}</div>
+        
         </div>
         :
         <label className={classes.RecipeItem} onClick={() => clickName()}> {props.name} </label>
